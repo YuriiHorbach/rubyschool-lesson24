@@ -19,25 +19,46 @@ post '/visit' do
 	@barber = params[:barber]
 	@color = params[:color]
 
-	if @name == ''
-		@error = 'Enter name'
-		return erb :visit
-	end
+	# хеш
+	hh = {:name => 'Enter name', 
+		    :phone => 'Enter phone', 
+		    :datetime => 'Enter date and time'
+		  }
 
-
-	if @phone == ''
-		@error = 'Enter phone'
-		return erb :visit
-	end
-
-	if @datetime == ''
-		@error = 'Enter date and time'
-		return erb :visit
-	end
-
-	if @error != ''
+	#для кожної пари ключ-значення
+	hh.each do |key, value|		
+	# якщо параметр порожній
+		if params[key] == ''			
+		# змінній @error присвоюємо value з хеша hh 
+		# (це значення - повідомлення про помилку)
+		# тобто змінній @error присвоїти повідомлення про помилку
+			@error = hh[key]	
+		# повернути view visit		
 			return erb :visit
+		end
 	end
+
+
+
+	# if @name == ''
+	# 	@error = 'Enter name'
+	# 	return erb :visit
+	# end
+
+
+	# if @phone == ''
+	# 	@error = 'Enter phone'
+	# 	return erb :visit
+	# end
+
+	# if @datetime == ''
+	# 	@error = 'Enter date and time'
+	# 	return erb :visit
+	# end
+
+	# if @error != ''
+	# 		return erb :visit
+	# end
 
 
 	# @message = "Dear #{@name}, we are glad that You are with us"
