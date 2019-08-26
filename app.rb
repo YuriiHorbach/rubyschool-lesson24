@@ -8,6 +8,7 @@ get '/' do
 end
 
 get '/about' do
+	@error = 'Something wrong!'
 	erb :about
 end
 
@@ -17,6 +18,11 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@barber = params[:barber]
 	@color = params[:color]
+
+	if @name == ''
+		@error = 'Enter name'
+		return erb :visit
+	end
 
 
 	# @message = "Dear #{@name}, we are glad that You are with us"
