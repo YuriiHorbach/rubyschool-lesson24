@@ -25,17 +25,23 @@ post '/visit' do
 		    :datetime => 'Enter date and time'
 		  }
 
-	#для кожної пари ключ-значення
-	hh.each do |key, value|		
-	# якщо параметр порожній
-		if params[key] == ''			
-		# змінній @error присвоюємо value з хеша hh 
-		# (це значення - повідомлення про помилку)
-		# тобто змінній @error присвоїти повідомлення про помилку
-			@error = hh[key]	
-		# повернути view visit		
-			return erb :visit
-		end
+	# #для кожної пари ключ-значення
+	# hh.each do |key, value|		
+	# # якщо параметр порожній
+	# 	if params[key] == ''			
+	# 	# змінній @error присвоюємо value з хеша hh 
+	# 	# (це значення - повідомлення про помилку)
+	# 	# тобто змінній @error присвоїти повідомлення про помилку
+	# 		@error = hh[key]	
+	# 	# повернути view visit		
+	# 		return erb :visit
+	# 	end
+	# end
+
+	@error = hh.select{|key,_| params[key] ==""}.values.join(", ")
+
+	if @error != ""
+		return erb :visit
 	end
 
 
