@@ -25,6 +25,21 @@ post '/visit' do
 	end
 
 
+	if @phone == ''
+		@error = 'Enter phone'
+		return erb :visit
+	end
+
+	if @datetime == ''
+		@error = 'Enter date and time'
+		return erb :visit
+	end
+
+	if @error != ''
+			return erb :visit
+	end
+
+
 	# @message = "Dear #{@name}, we are glad that You are with us"
 
 	f = File.open "./public/user.txt", "a"
